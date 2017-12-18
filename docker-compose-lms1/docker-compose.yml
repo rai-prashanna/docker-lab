@@ -1,0 +1,33 @@
+version: '2'
+services:
+   java8:
+     build: ./java8
+     ports:
+      - '890:6379'
+     links:
+      - mongo:mongo
+      - redis:redis
+     volumes:
+       - $PWD:/temp
+     #networks:
+     # - mongo-network
+
+   mongo:
+    build: ./mongo
+    ports:
+      - '27017:27017'
+
+   redis:
+    build: ./redis
+    ports:
+      - '6379:6379'
+    #networks:
+    #  - mongo-network
+    #depends_on:
+    #  - java8
+
+#volumes:
+#    db_data:
+#networks:
+#  mongo-network:
+#      driver: bridge
